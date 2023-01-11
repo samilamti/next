@@ -7,15 +7,35 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
+    <div id="suggestion">
         Suggestion
     </div>
     <div style="display: flex">
-        <button>«</button>
-        <button>»</button>
+        <button id="prev">«</button>
+        <button id="next">»</button>
     </div>
     <script>
+        const suggestion = document.getElementById('suggestion');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
 
+        const suggestions = ['do this', 'do that', '3rd'];
+        const suggestionIndex = 0;
+
+        function getSuggestion(index) {
+            console.group('getSuggestion', index);
+            const suggestion = suggestions[index];
+            console.log('suggestion', suggestion);
+            console.groupEnd();
+            return suggestion;
+        }
+
+        prev.addEventListener('click', () => {
+            suggestion.textContent = getSuggestion(suggestionIndex > 0 ? 0 : --suggestionIndex);
+        });
+        next.addEventListener('click', () => {
+            suggestion.textContent = getSuggestion(suggestionIndex >= suggestions.length - 1 ? 0 : ++suggestionIndex);
+        });
     </script>
 </body>
 </html>
