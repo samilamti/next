@@ -4,15 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Next</title>
+    <style>
+        div#suggestion {
+            font-size: 18pt;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        button {
+            font-size: 48pt;
+            background-color: transparent;
+            border-style: none;
+        }
+        div#buttons {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: space-evenly;
+        }
+    </style>
 </head>
 <body>
     <div id="suggestion">
         Suggestion
     </div>
-    <div style="display: flex">
-        <button id="prev">«</button>
-        <button id="next">»</button>
+    <div id="buttons">
+        <button id="prev"> ⏮ </button>
+        <button id="next"> ⏭ </button>
     </div>
     <script>
         const suggestion = document.getElementById('suggestion');
@@ -22,19 +40,24 @@
         const suggestions = ['do this', 'do that', '3rd'];
         let suggestionIndex = 0;
 
-        function getSuggestion(index) {
-            console.group('getSuggestion', index);
-            const suggestion = suggestions[index];
+        function getSuggestion(relativeIndex) {
+            let index = suggestionIndex + relativeIndex;
+            if (index > suggestions.length) index = 0;
+            else if (index < 0) index = suggestions.length - 1;
+            suggestionIndex = index;
+
+            console.group('getSuggestion relativeIndex:', relativeIndex, 'suggestionIndex:', suggestionIndex);
+            const suggestion = suggestions[suggestionIndex];
             console.log('suggestion', suggestion);
             console.groupEnd();
             return suggestion;
         }
 
         prev.addEventListener('click', () => {
-            suggestion.textContent = getSuggestion(suggestionIndex > 0 ? 0 : --suggestionIndex);
+            suggestion.textContent = getSuggestion(-1);
         });
         next.addEventListener('click', () => {
-            suggestion.textContent = getSuggestion(suggestionIndex >= suggestions.length - 1 ? 0 : ++suggestionIndex);
+            suggestion.textContent = getSuggestion(+1);
         });
     </script>
 </body>
