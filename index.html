@@ -6,21 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next</title>
     <style>
+        body {
+            width: 100%;
+            height: -webkit-fill-available;
+            margin: 2% 0;
+            display: grid;
+            grid-template-rows: 1fr 9fr;
+            grid-template-columns: 1fr 1fr;
+            background-color: #b2bed378;
+        }
         div#suggestion {
             font-size: 18pt;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+            grid-column: 1 / span 2;
+            text-align: center;
         }
         button {
-            font-size: 48pt;
+            font-size: 28pt;
             background-color: transparent;
             border-style: none;
         }
-        div#buttons {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            align-content: center;
-            justify-content: space-evenly;
+        button#prev {
+            grid-row: 2;
+        }
+        button#next {
+            grid-row: 2;
+            grid-column: 2;
         }
     </style>
 </head>
@@ -28,10 +39,8 @@
     <div id="suggestion">
         Suggestion
     </div>
-    <div id="buttons">
-        <button id="prev"> ⏮ </button>
-        <button id="next"> ⏭ </button>
-    </div>
+    <button id="prev"> ❌ No thanks </button>
+    <button id="next"> ✅ OK, sure! </button>
     <script>
         const suggestion = document.getElementById('suggestion');
         const prev = document.getElementById('prev');
