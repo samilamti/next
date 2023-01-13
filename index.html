@@ -9,20 +9,20 @@
         body {
             width: 100%;
             height: -webkit-fill-available;
-            margin: 2% 0;
+            margin: 20% 0 0 0;
             display: grid;
-            grid-template-rows: 1fr 9fr;
+            grid-template-rows: 1fr 4fr;
             grid-template-columns: 1fr 1fr;
             background-color: #b2bed378;
         }
         div#suggestion {
-            font-size: 18pt;
+            font-size: 28pt;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             grid-column: 1 / span 2;
             text-align: center;
         }
         button {
-            font-size: 28pt;
+            font-size: 14pt;
             background-color: transparent;
             border-style: none;
         }
@@ -37,7 +37,7 @@
 </head>
 <body>
     <div id="suggestion">
-        Suggestion
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur iusto veritatis corporis excepturi, pariatur aperiam omnis, dicta tempore dolore esse, nobis itaque perferendis illo ea possimus commodi rem ex odio!
     </div>
     <button id="prev"> ❌ No thanks </button>
     <button id="next"> ✅ OK, sure! </button>
@@ -46,8 +46,8 @@
         const prev = document.getElementById('prev');
         const next = document.getElementById('next');
 
-        const suggestions = ['Make dinner', 'Eat dinner', 'Put dieshes away', 'Put food away', 'Put stuff in dishwasher', 'Start dishwasher', 'Drink water', 'Order food', 'Take a walk', 'Watch something on Udemy', 'Brush teeth', 'Weigh and record weight', 'Take out clothes for tomorrow', 'Read a little', 'Lift weights', 'Stretch', 'Mediate', 'Make warm water', 'Bring warm water', 'Shower', 'Shave', 'Drink warm water', 'Dry', 'Lotion', 'Watch an episode', 'Read a little', 'Sleep', 'Wake up', 'Meditate', 'Brush teeth', 'Wash up', 'Put on clothes', 'Feed the cats', 'Drink vitamin D', 'Bring trash bag upstairs', 'Do upstairs litter box', 'Bring trash and recycle square containers downstairs', 'Bring water jug downstairs', 'Put cats away', 'Walk while listening to inspirational book', 'Take out trash', 'Release cats', 'Bring water and square containers upstairs', 'Refill coffee pot and cat fountain', 'Do a little bit on the house: Paint', 'Code for myself: Next app', 'Plan the day', 'Consolidate a note: Delete', 'Plan a research activity', 'Work: Expense reports, claims', 'Read while lying down by window', 'Make any personal calls', 'Work: ??', 'Open Window', 'Make coffee', 'Lift weights', 'Drink coffee for lunch', 'Close window', 'Have meetings', 'Open window', 'Lift weighs', 'Close window', 'Watch something brand new on Udemy while playing games'];
-        let suggestionIndex = 0;
+        const suggestions = ['Make dinner', 'Eat dinner', 'Put dishes away', 'Put food away', 'Put stuff in dishwasher', 'Start dishwasher', 'Drink water', 'Order food', 'Take a walk', 'Watch something on Udemy', 'Brush teeth', 'Weigh and record weight', 'Take out clothes for tomorrow', 'Read a little', 'Lift weights', 'Stretch', 'Mediate', 'Make warm water', 'Bring warm water', 'Shower', 'Shave', 'Drink warm water', 'Dry', 'Lotion', 'Watch an episode', 'Read a little', 'Sleep', 'Wake up', 'Meditate', 'Brush teeth', 'Wash up', 'Put on clothes', 'Feed the cats', 'Drink vitamin D', 'Bring trash bag upstairs', 'Do upstairs litter box', 'Bring trash and recycle square containers downstairs', 'Bring water jug downstairs', 'Put cats away', 'Walk while listening to inspirational book', 'Take out trash', 'Release cats', 'Bring water and square containers upstairs', 'Refill coffee pot and cat fountain', 'Do a little bit on the house: Paint', 'Code for myself: Next app', 'Plan the day', 'Consolidate a note: Delete', 'Plan a research activity', 'Work: Expense reports, claims', 'Read while lying down by window', 'Make any personal calls', 'Work: ??', 'Open Window', 'Make coffee', 'Lift weights', 'Drink coffee for lunch', 'Close window', 'Have meetings', 'Open window', 'Lift weighs', 'Close window', 'Watch something brand new on Udemy while playing games'];
+        let suggestionIndex = parseInt(localStorage.getItem('suggestion index') ?? '0');
 
         function getSuggestion(relativeIndex) {
             let index = suggestionIndex + relativeIndex;
