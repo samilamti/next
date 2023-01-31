@@ -8,7 +8,7 @@
     <style>
         body {
             width: 100%;
-            height: -webkit-fill-available;
+            height: 100%;
             margin: 20% 0 0 0;
             display: grid;
             grid-template-rows: 1fr 4fr;
@@ -45,11 +45,36 @@
         const suggestion = document.getElementById('suggestion');
         const prev = document.getElementById('prev');
         const next = document.getElementById('next');
+        const MONDAY = 1;
+        const FRIDAY = 5;
 
-        const suggestions = ['Make dinner', 'Eat dinner', 'Put dishes away', 'Put food away', 'Put stuff in dishwasher', 'Start dishwasher', 'Drink water', 'Order food', 'Take a walk', 'Watch something on Udemy', 'Brush teeth', 'Weigh and record weight', 'Take out clothes for tomorrow', 'Read a little', 'Lift weights', 'Stretch', 'Mediate', 'Make warm water', 'Bring warm water', 'Shower', 'Shave', 'Drink warm water', 'Dry', 'Lotion', 'Watch an episode', 'Read a little', 'Sleep', 'Wake up', 'Meditate', 'Brush teeth', 'Wash up', 'Put on clothes', 'Feed the cats', 'Drink vitamin D', 'Bring trash bag upstairs', 'Do upstairs litter box', 'Bring trash and recycle square containers downstairs', 'Bring water jug downstairs', 'Put cats away', 'Walk while listening to inspirational book', 'Take out trash', 'Release cats', 'Bring water and square containers upstairs', 'Refill coffee pot and cat fountain', 'Do a little bit on the house: Paint', 'Code for myself: Next app', 'Plan the day', 'Consolidate a note: Delete', 'Plan a research activity', 'Work: Expense reports, claims', 'Read while lying down by window', 'Make any personal calls', 'Work: ??', 'Open Window', 'Make coffee', 'Lift weights', 'Drink coffee for lunch', 'Close window', 'Have meetings', 'Open window', 'Lift weighs', 'Close window', 'Watch something brand new on Udemy while playing games'];
+        const suggestions = [
+            { id: 1, text: 'Take meter reading', frequency: '7 days' },
+            { id: 2, text: 'Go swimming (till 18)', dayOfWeek: FRIDAY, fromHour: 14, toHour: 18 },
+            { id: 3, text: 'Go swimming (till 19)', dayOfWeek: MONDAY, fromHour: 14, toHour: 19 }
+        ];
         let suggestionIndex = parseInt(localStorage.getItem('suggestion index') ?? '0');
 
         function getSuggestion(relativeIndex) {
+            const now = new Date();
+            const dayOfWeek = now.getDay();
+            const hour = now.getHours();
+
+            const timeBasedSuggestion = suggestions
+                .filter(s =>
+                    (s.dayOfWeek && s.dayOfWeek === dayOfWeek) &&
+                    (s.fromHour && s.fromHour >= hour) &&
+                    (s.toHour && s.toHour < hour))
+                .at(0);
+
+            if (timeBasedSuggestion) {
+                console.group('getSuggestion');
+                console.log('using time based suggestion');
+                console.log(timeBasedSuggestion);
+                console.groupEnd();
+                return timeBasedSuggestion.text;
+            }
+
             let index = suggestionIndex + relativeIndex;
             if (index > suggestions.length) index = 0;
             else if (index < 0) index = suggestions.length - 1;
